@@ -11,8 +11,10 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { HeroService } from './services/hero.service';
 import { MessageService } from './services/message.service';
 import { ObservertestComponent } from './test/observertest/observertest.component';
-import { StudentDetailComponent } from './components/student-detail/student-detail.component';
-import { HeaderComponent } from './components/header/header.component';
+import { UserDetailComponent } from './components/without-subject/user-detail/user-detail.component';
+import { HeaderComponent } from './components/without-subject/header/header.component';
+import { UserSubjectDetailComponent } from './components/subject/user-subject-detail/user-subject-detail.component';
+import { HeaderSubjectComponent } from './components/subject/header-subject/header-subject.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +23,10 @@ import { HeaderComponent } from './components/header/header.component';
     HeroDetailComponent,
     MessagesComponent,
     ObservertestComponent,
-    StudentDetailComponent,
-    HeaderComponent
+    UserDetailComponent,
+    HeaderComponent,
+    UserSubjectDetailComponent,
+    HeaderSubjectComponent
   ],
   imports: [
     BrowserModule,
