@@ -1,4 +1,23 @@
-<p>
-  {{firstName}}
+<p *ngIf = "userInfo"><b>First method using User object</b><br>
+  First Name: {{userInfo.FirstName}}<br>
+  Role Id: {{userInfo.RoleId}}<br>
+</p>
+
+<hr/>
+
+<p><b>Second method using User object</b><br>
+  First Name: {{firstName}}<br>
+  Role Id: {{roleId}}<br>
   <button (click)="UpdateUserUserSubject()">Update User Using Subject</button>
+  <button (click)="GetUserUsingSubject()">Get User</button>
+</p>
+
+<hr/>
+
+<p>
+  <b>User list</b>
+  <input type="text" [(ngModel)]="userId" title="Enter UserId" (input)="GetAllUsers()">
+  <li *ngFor="let user of userList">
+    {{user.FirstName}}
+  </li>
 </p>
