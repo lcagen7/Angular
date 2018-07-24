@@ -21,6 +21,7 @@
     "@angular/core": "^6.0.0",
     "@angular/forms": "^6.0.0",
     "@angular/http": "^6.0.0",
+    "@angular/material": "^6.4.1",
     "@angular/platform-browser": "^6.0.0",
     "@angular/platform-browser-dynamic": "^6.0.0",
     "@angular/router": "^6.0.0",
@@ -28,7 +29,8 @@
     "angular-in-memory-web-api": "^0.6.0",
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
-    "zone.js": "^0.8.24"
+    "zone.js": "^0.8.24",
+    "@angular/cdk": "^6.2.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.0",
@@ -40,7 +42,7 @@
     "@types/node": "^6.0.45",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~1.7.1",
+    "karma": "^2.0.4",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~1.4.2",
     "karma-jasmine": "~1.1.1",
