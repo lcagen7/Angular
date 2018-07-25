@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "../../../services/user.service";
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-header-subject',
@@ -8,13 +8,13 @@ import { UserService } from "../../../services/user.service";
 })
 export class HeaderSubjectComponent implements OnInit {
 
-  userName : string;
+  userName: string;
 
-  constructor(private userService : UserService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.userService.userInfoSubject
-      .subscribe(data => this.userName = data.FirstName + " " + data.LastName);
+      .subscribe(data => this.userName = data.FirstName + ' ' + data.LastName);
   }
 
 }

@@ -3,7 +3,7 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { SampleTableDataSource } from './sample-table-datasource';
 
 @Component({
-  selector: 'app-components/sample-table',
+  selector: 'app-sample-table',
   templateUrl: './sample-table.component.html',
   styleUrls: ['./sample-table.component.css']
 })

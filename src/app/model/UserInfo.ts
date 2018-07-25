@@ -5,4 +5,3 @@ export class UserInfo {
     LoginId: string;
     RoleId: number;
   }
-  

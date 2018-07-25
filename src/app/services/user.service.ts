@@ -13,9 +13,9 @@ export class UserService {
   // public userInfoSubject = new Rx.ReplaySubject<UserInfo>(2);
   public userInfoSubject = new Subject<UserInfo>();
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getUser() : Observable<UserInfo>{
+  getUser(): Observable<UserInfo> {
     const url = 'http://localhost/api/user/getuser';
     return this.http.get<UserInfo>(url)
     .pipe(
@@ -23,28 +23,28 @@ export class UserService {
     );
   }
 
-  updateUser() : Observable<UserInfo>{
+  updateUser(): Observable<UserInfo> {
     const url = 'http://localhost/api/user/updateuser';
 
-    let userInfo : UserInfo = {
-      FirstName:'FName1Updated',
-      LastName:'LName1Updated',
-      LoginId:'FL1',
-      RoleId:1,
-      UserId:1
+    const userInfo: UserInfo = {
+      FirstName: 'FName1Updated',
+      LastName: 'LName1Updated',
+      LoginId: 'FL1',
+      RoleId: 1,
+      UserId: 1
     };
 
-    return this.http.put<UserInfo>(url, userInfo)
+    return this.http.put<UserInfo>(url, userInfo);
   }
 
-  getUserUsingSubject(){
+  getUserUsingSubject() {
     const url = 'http://localhost/api/user/getuser';
     this.http.get<UserInfo>(url).subscribe(
       serviceData => this.userInfoSubject.next(serviceData)
     );
   }
 
-  updateUserUsingSubject(){
+  updateUserUsingSubject() {
     const url = 'http://localhost/api/user/updateuser';
 
     const httpOptions = {
@@ -53,24 +53,23 @@ export class UserService {
       })
     };
 
-    let userInfo : UserInfo = {
-      FirstName:'FName1Updated',
-      LastName:'LName1Updated',
-      LoginId:'FL1',
-      RoleId:1,
-      UserId:1
-    }
+    const userInfo: UserInfo = {
+      FirstName: 'FName1Updated',
+      LastName: 'LName1Updated',
+      LoginId: 'FL1',
+      RoleId: 1,
+      UserId: 1
+    };
 
     this.http.put<UserInfo>(url, userInfo, httpOptions).
-      pipe(map((returnData:UserInfo)=>
-      {
+      pipe(map((returnData: UserInfo) => {
         return{
-          FirstName:'Name is updated by MAP -- ' + returnData.FirstName,
-          LastName:returnData.LastName,
-          LoginId:returnData.LoginId,
-          RoleId:returnData.RoleId * 2,
-          UserId:returnData.UserId
-        }
+          FirstName: 'Name is updated by MAP -- ' + returnData.FirstName,
+          LastName: returnData.LastName,
+          LoginId: returnData.LoginId,
+          RoleId: returnData.RoleId * 2,
+          UserId: returnData.UserId
+        };
       }
       )).
       subscribe(
@@ -78,12 +77,12 @@ export class UserService {
     );
   }
 
-  getAllUsers(userId : number) : Observable<Array<UserInfo>>{
+  getAllUsers(userId: number): Observable<Array<UserInfo>> {
     const url = 'http://localhost/api/user/getallusers';
     return this.http.get<Array<UserInfo>>(url)
       .pipe(
         map(serviceData => serviceData.filter(singleServiceData => singleServiceData.UserId > userId)
       )
-    )
+    );
   }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from "@angular/material";
-import { ModelDialogComponent } from "../../common/model-dialog/model-dialog.component";
-import { Router } from "@angular/router";
-import { AuthenticationService } from "../../../services/authentication.service";
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { ModelDialogComponent } from '../../common/model-dialog/model-dialog.component';
+import { Router } from '@angular/router';
+import { TokenService } from '../../../core/token.service';
+import { AuthenticationService } from '../../../core/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -11,34 +12,40 @@ import { AuthenticationService } from "../../../services/authentication.service"
 })
 export class LoginComponent implements OnInit {
 
-  userName : string;
-  password : string;
-  token : string;
+  userName: string;
+  password: string;
+  token: string;
+  isAuthenticated: Boolean;
 
-  constructor(public dialog : MatDialog,
-    private router : Router,
-    private authenticationService : AuthenticationService) { }
+  constructor(public dialog: MatDialog,
+    private router: Router,
+    private tokenService: TokenService,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-  }  
-  
-  Login(){
-    
-    this.authenticationService.Authentication(this.userName, this.password)
+    if (this.authenticationService.isLoggedin) {
+      this.router.navigate(['dashboard']);
+    }
+  }
+
+  login() {
+    this.tokenService.GetToken(this.userName, this.password)
       .subscribe(
-        successData => this.navigateToDashbord(successData),
+        successData => this.authenticateAndRedirect(successData),
         errorData => this.showError(errorData)
       );
   }
 
-  navigateToDashbord(token : string){
-    localStorage.setItem('token', token);
-          this.router.navigate(["dashboard"]);
+  authenticateAndRedirect(token: string) {
+    this.authenticationService.login(token);
+    if (this.authenticationService.isLoggedin) {
+      this.router.navigate(['dashboard']);
+    }
   }
 
-  showError(message : string) : void {
+  showError(message: string): void {
       this.dialog.open(ModelDialogComponent, {
         data: message
       });
-  } 
+  }
 }
