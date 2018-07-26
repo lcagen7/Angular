@@ -15,12 +15,12 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(): Observable<UserInfo> {
-    const url = 'http://localhost/api/user/getuser';
-    return this.http.get<UserInfo>(url)
-    .pipe(
-      filter(serviceData => serviceData.RoleId === 1)
-    );
+  getUser(user: string): Observable<UserInfo> {
+    const url = 'http://localhost/api/user/getuser/' + user;
+    return this.http.get<UserInfo>(url);
+    // .pipe(
+    //   filter(serviceData => serviceData.RoleId === 1)
+    // );
   }
 
   updateUser(): Observable<UserInfo> {

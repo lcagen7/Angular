@@ -11,7 +11,6 @@ import { MessagesComponent } from './components/messages/messages.component';
 
 import { HeroService } from './services/hero.service';
 import { MessageService } from './services/message.service';
-import { ObservertestComponent } from './test/observertest/observertest.component';
 import { UserDetailComponent } from './components/without-subject/user-detail/user-detail.component';
 import { HeaderComponent } from './components/without-subject/header/header.component';
 import { UserSubjectDetailComponent } from './components/subject/user-subject-detail/user-subject-detail.component';
@@ -45,10 +44,14 @@ import { ModelDialogComponent } from './components/common/model-dialog/model-dia
 
 import { AuthenticationService } from './core/authentication.service';
 import { AuthenticationGuard } from './core/authentication.guard';
+import { AdminRoleGuard } from './core/admin-role.guard';
+
+import { SettingsComponent } from './components/settings/settings.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticationGuard]}
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticationGuard]},
+  {path: 'settings', component: SettingsComponent, canActivate: [AdminRoleGuard], data: { expectedRole: 1 } }
 ];
 
 @NgModule({
@@ -57,7 +60,6 @@ const appRoutes: Routes = [
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    ObservertestComponent,
     UserDetailComponent,
     HeaderComponent,
     UserSubjectDetailComponent,
@@ -66,7 +68,8 @@ const appRoutes: Routes = [
     SampleTableComponent,
     DashboardComponent,
     LoginComponent,
-    ModelDialogComponent
+    ModelDialogComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

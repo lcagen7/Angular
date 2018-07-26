@@ -22,6 +22,8 @@ export class NavigationBarComponent {
     private router: Router) { }
 
   logout() {
+    console.log('Logout called');
     this.authenticationService.logout();
+    this.router.navigate(['login']);
   }
 }

@@ -2,26 +2,24 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
+export class AdminRoleGuard implements CanActivate {
 
-export class AuthenticationGuard implements CanActivate {
-
-  private isAuthenticated: boolean;
-
-  constructor(private authenticationService: AuthenticationService,
-    private router: Router) {  }
+  constructor(private authenticationService: AuthenticationService) {  }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+      const expectedRole = next.data.expectedRole;
+
       if (this.authenticationService.isAuthenticated()) {
-        return true;
+        if (this.authenticationService.userInfo.RoleId === expectedRole) {
+          return true;
+        }
       }
-    this.router.navigate(['login']);
     return false;
   }
 }
